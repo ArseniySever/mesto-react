@@ -1,4 +1,4 @@
-import PopupWithForm from "../popup-validation";
+import PopupWithForm from "./PopupWithForm";
 function PopupPlace({ isOpen, onClose}){
     return(
         <PopupWithForm name="place" title="Новое место" isOpen={isOpen} onClose={onClose} buttonName="Добавить" >

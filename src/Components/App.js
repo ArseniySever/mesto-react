@@ -1,13 +1,13 @@
 import React from 'react';
 import '../../index.css';
-import Header from './header/header';
-import Footer from './footer/footer'; 
-import Main from './main/main';
-import PopupAvatar from './popup-avatar/popup-avatar';
+import Header from './header';
+import Footer from './footer'; 
+import Main from './main';
+import PopupAvatar from './popup-avatar';
 import PopupProfile from './popup-profile';
-import PopupPlace from './popup-place/popup-place';
-import ImagePopup from '../ImagePopup/popup-image';
-import PopupDelete from './popup-delete/popup-delete';
+import PopupPlace from './popup-place';
+import ImagePopup from '../ImagePopup';
+import PopupDelete from './popup-delete';
 import api from '../utils/Api';
 
 function App() {
