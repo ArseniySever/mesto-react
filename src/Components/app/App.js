@@ -6,7 +6,7 @@ import Main from '../main/main';
 import PopupAvatar from '../popup-avatar/popup-avatar';
 import PopupProfile from '../popup-profile/popup-profile';
 import PopupPlace from '../popup-place/popup-place';
-import PopupImage from '../popup-image/popup-image';
+import ImagePopup from '../popup-image/popup-image';
 import PopupDelete from '../popup-delete/popup-delete';
 import api from '../../utils/Api';
 
@@ -58,7 +58,7 @@ function App() {
         <PopupAvatar isOpen={isPopupAvatarOpen} onClose={closeAllPopups}/>
         <PopupProfile isOpen={isPopupProfileOpen} onClose={closeAllPopups}/>
         <PopupPlace isOpen={isPopupPlaceOpen} onClose={closeAllPopups} />
-        <PopupImage cardLink={selectedCard.link} cardName={selectedCard.name} onClose={closeAllPopups} isOpen={selectedCard.isOpen}/>
+        <ImagePopup cardLink={selectedCard.link} cardName={selectedCard.name} onClose={closeAllPopups} isOpen={selectedCard.isOpen}/>
         <PopupDelete/>
     </div>
   );
