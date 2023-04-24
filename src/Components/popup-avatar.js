@@ -1,5 +1,5 @@
 
-import PopupWithForm from "../popup-validation/popup-validation";
+import PopupWithForm from "../popup-validation";
 function PopupAvatar({ isOpen, onClose}){
     return(
         <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={onClose} buttonName="Обновить">

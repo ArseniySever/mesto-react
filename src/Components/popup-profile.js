@@ -1,4 +1,4 @@
-import PopupWithForm from "../popup-validation/popup-validation";
+import PopupWithForm from "./popup-validation";
 function PopupProfile({ isOpen, onClose}){
     return(
     <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isOpen} onClose={onClose} buttonName="Сохранить" >

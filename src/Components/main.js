@@ -1,6 +1,6 @@
 import React from "react";
-import api from "../../utils/Api";
-import Card from "../card/Card";
+import api from "../utils/Api";
+import Card from "./Card";
 function Main({ onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick}){
     const [apiSearch, setapiSearch] = React.useState('');
 
