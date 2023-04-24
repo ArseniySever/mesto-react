@@ -1,3 +1,4 @@
+import React from 'react';
 function ImagePopup({cardName, cardLink, isOpen, onClose}){
     return(
     <div id="popup_image" className={`popup popup-image ${isOpen ? 'popup_opened' : ''}`}>
