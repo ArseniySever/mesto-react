@@ -6,9 +6,9 @@ import Main from './main';
 import PopupAvatar from './popup-avatar';
 import PopupProfile from './popup-profile';
 import PopupPlace from './popup-place';
-import ImagePopup from '../ImagePopup';
 import PopupDelete from './popup-delete';
 import api from '../utils/Api';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isPopupPlaceOpen, setPopupPlaceOpen] = React.useState(false);
