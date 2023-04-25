@@ -7,7 +7,7 @@ import PopupAvatar from './popup-avatar';
 import PopupProfile from './popup-profile';
 import PopupPlace from './popup-place';
 import PopupDelete from './popup-delete';
-import Api from '../utils/Api';
+import api from '../utils/Api';
 import ImagePopup from './ImagePopup';
 import Card from './Card';
 
