@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../index.css';
+import '../index.css';
 import Header from './header';
+import Main from './Main';
 import Footer from './footer'; 
-import Main from './main';
 import PopupAvatar from './popup-avatar';
 import PopupProfile from './popup-profile';
 import PopupPlace from './popup-place';
@@ -22,6 +22,9 @@ function App() {
     api.getInitialCards()
       .then(cards => {
         setCards(cards);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
       });
   }, []);
 

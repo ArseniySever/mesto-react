@@ -15,11 +15,10 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick}){
             setUserDescription(data.about);
             setUserAvatar(data.avatar);
         })
-    }
-    )
-   
-    
-    
+        .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          });
+  },  []);
 
     return(
     <section className='main'>
@@ -28,7 +27,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick}){
             <img
             className="profile__avatar"
             style={{ backgroundImage: `url(${userAvatar})` }} 
-            alt=""
+            alt="аватар"
             />
             <button
             type="button"
@@ -47,13 +46,10 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick}){
 ></button>
         </section>
         <section className="elements">
-            {cards.map(({ _id, ...cards }) => <Card key={cards.id} {...cards}  onCardClick={onCardClick} />)}
+            {cards.map(({ _id, ...cards }) => <Card key={_id} {...cards}  onCardClick={onCardClick} />)}
         </section>
     </section>
       );  
     
 }
-
-
-
 export default Main;
