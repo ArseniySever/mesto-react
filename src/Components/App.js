@@ -1,14 +1,15 @@
 import React from 'react';
 import '../index.css';
-import Header from './header';
+import Header from './Header';
 import Main from './Main';
-import Footer from './footer'; 
+import Footer from './Footer'; 
 import PopupAvatar from './popup-avatar';
 import PopupProfile from './popup-profile';
 import PopupPlace from './popup-place';
 import PopupDelete from './popup-delete';
 import api from '../utils/Api';
 import ImagePopup from './ImagePopup';
+import Card from './Card';
 
 function App() {
   const [isPopupPlaceOpen, setPopupPlaceOpen] = React.useState(false);
