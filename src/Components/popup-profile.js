@@ -1,4 +1,4 @@
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from "./components/PopupWithForm";
 function PopupProfile({ isOpen, onClose}){
     return(
     <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isOpen} onClose={onClose} buttonName="Сохранить" >
