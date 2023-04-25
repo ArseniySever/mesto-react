@@ -88,4 +88,4 @@ const apiSettings = {
 
 const api = new Api(apiSettings);
 
-export default api;
+export default Api;
