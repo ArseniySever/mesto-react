@@ -16,16 +16,19 @@ class Api {
     })
     .then((res) => this._parseResponse(res))
   }
-  addCard(data) {
+  addCard({name, link}) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        link: data.link,
+        name: name,
+        link: link,
       })
     })
-      .then((res) => this._parseResponse(res))
+    .then(result => {
+      if (result.ok) return result.json();
+      else return Promise.reject(result.status);
+    });
   }
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
@@ -34,20 +37,17 @@ class Api {
     })
       .then((res) => this._parseResponse(res))
   }
-  setLike(cardId) {
+  setLike(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
+      method: isLiked ? "PUT" : 'DELETE',
       headers: this._headers,
     })
-      .then((res) => this._parseResponse(res))
-  }
-  deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
-      headers: this._headers,
+    .then(result => {
+      if (result.ok) return result.json();
+      else return Promise.reject(result.status);
     })
-      .then((res) => this._parseResponse(res))
   }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
@@ -55,24 +55,27 @@ class Api {
     })
       .then((res) => this._parseResponse(res))
   }
-  editUserInfo(data) {
+  editUserInfo(name, desc) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        about: data.about,
+        name: name,
+        about: desc,
       })
     })
-      .then((res) => this._parseResponse(res))
-  }
+    .then(result => {
+      if (result.ok) return result.json();
+      else return Promise.reject(result.status);
+    });
+}
 
-  editAvatar(data) {
+  editAvatar({url}) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: url,
       })
     })
       .then((res) => this._parseResponse(res))

@@ -9,6 +9,7 @@ import PopupAvatar from './popup-avatar';
 import PopupProfile from './popup-profile';
 import PopupPlace from './popup-place';
 import PopupDelete from './popup-delete';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 
 
@@ -18,8 +19,13 @@ function App() {
   const [isPopupProfileOpen, setIsPopupProfileOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false });
+  const [currentUser, setCurrentUser] = React.useState({});
 
 
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then(result => setCurrentUser(result));
+  }, []);
   React.useEffect(() => {
     api.getInitialCards()
       .then(cards => {
@@ -37,6 +43,24 @@ function App() {
       link: card.link
     });
   }
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    api.setLike(card._id, !isLiked)
+      .then((newCard) => {
+        const newCards = cards.map(c => c._id === card._id ? newCard : c);
+        setCards(newCards);
+    });
+} 
+function handleCardDelete(card) {
+  api.deleteCard(card._id)
+    .then(() => {
+      console.log(card._id);
+      setCards(cards.filter(c => c._id !== card._id));
+    })
+    .catch((err) => console.log(`Ошибка при удалении карточки: ${err}`));
+}
+
+
   function closeAllPopups() {
     setPopupPlaceOpen(false);
     setIsPopupAvatarOpen(false);
@@ -53,19 +77,42 @@ function App() {
   function onAddPlace(){
     setPopupPlaceOpen(true);
     }
-
+    function handleUpdateUser(name, description) {
+      api.editUserInfo(name, description)
+        .then(result => setCurrentUser(result))
+        .catch(err => console.log(`Error ${err} in editUserAvatar`));
+  
+      closeAllPopups();
+    }
+    function handleUpdateAvatar(avatar) {
+      api.editAvatar({url:avatar})
+        .then(result => setCurrentUser(result))
+        .catch(err => console.log(`Error ${err} in editUserAvatar`));
+  
+      closeAllPopups();
+    }
+    function handleAddPlaceSubmit(name, link) {
+      api.addCard({ name: name, link: link })
+        .then(newCard => setCards([...cards, newCard]))
+        .catch(err => console.log(`Error ${err} in addCard`));
+  
+      closeAllPopups();
+    }
+   
   return (
-    <div className="page">
-        <Header/>
-          <Main onEditProfile={onEditProfile} onAddPlace={onAddPlace} onEditAvatar={onEditAvatar} onCardClick={handleCardClick} cards={cards} >
-          </Main>
-        <Footer/>
-        <PopupAvatar isOpen={isPopupAvatarOpen} onClose={closeAllPopups}/>
-        <PopupProfile isOpen={isPopupProfileOpen} onClose={closeAllPopups}/>
-        <PopupPlace isOpen={isPopupPlaceOpen} onClose={closeAllPopups} />
-        <ImagePopup cardLink={selectedCard.link} cardName={selectedCard.name} onClose={closeAllPopups} isOpen={selectedCard.isOpen}/>
-        <PopupDelete/>
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+          <Header/>
+            <Main onEditProfile={onEditProfile} onAddPlace={onAddPlace} onEditAvatar={onEditAvatar} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}>
+            </Main>
+          <Footer/>
+          <PopupAvatar isOpen={isPopupAvatarOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+          <PopupProfile isOpen={isPopupProfileOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+          <PopupPlace isOpen={isPopupPlaceOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+          <ImagePopup cardLink={selectedCard.link} cardName={selectedCard.name} onClose={closeAllPopups} isOpen={selectedCard.isOpen}/>
+          <PopupDelete/>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
