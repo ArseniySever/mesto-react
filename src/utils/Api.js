@@ -13,80 +13,64 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-    .then((res) => this._parseResponse(res))
+    }).then((res) => this._parseResponse(res));
   }
-  addCard({name, link}) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link,
-      })
-    })
-    .then(result => {
-      if (result.ok) return result.json();
-      else return Promise.reject(result.status);
-    });
+      }),
+    }).then((res) => this._parseResponse(res));
   }
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
+    }).then((res) => this._parseResponse(res));
   }
   setLike(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: isLiked ? "PUT" : 'DELETE',
+      method: isLiked ? "PUT" : "DELETE",
       headers: this._headers,
-    })
-    .then(result => {
-      if (result.ok) return result.json();
-      else return Promise.reject(result.status);
-    })
+    }).then((res) => this._parseResponse(res));
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'GET',
+      method: "GET",
       headers: this._headers,
-    })
-      .then((res) => this._parseResponse(res))
+    }).then((res) => this._parseResponse(res));
   }
   editUserInfo(name, desc) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: desc,
-      })
-    })
-    .then(result => {
-      if (result.ok) return result.json();
-      else return Promise.reject(result.status);
-    });
-}
+      }),
+    }).then((res) => this._parseResponse(res));
+  }
 
-  editAvatar({url}) {
+  editAvatar({ url }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: url,
-      })
-    })
-      .then((res) => this._parseResponse(res))
+      }),
+    }).then((res) => this._parseResponse(res));
   }
 }
 const apiSettings = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-63",
   headers: {
-    authorization: 'b1be6ff6-5ee2-4424-9627-8adc5e79825a',
-    'Content-Type': 'application/json',
-  }
+    authorization: "b1be6ff6-5ee2-4424-9627-8adc5e79825a",
+    "Content-Type": "application/json",
+  },
 };
 
 const api = new Api(apiSettings);
