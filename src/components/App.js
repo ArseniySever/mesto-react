@@ -5,10 +5,10 @@ import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import "../index.css";
 import api from "../utils/Api";
-import PopupAvatar from "./Popup-Avatar";
-import PopupProfile from "./Popup-Profile";
-import PopupPlace from "./Popup-Place";
-import PopupDelete from "./Popup-Delete";
+import PopupAvatar from "./PopupAvatar";
+import PopupProfile from "./PopupProfile";
+import PopupPlace from "./PopupPlace";
+import PopupDelete from "./PopupDelete";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function App() {
